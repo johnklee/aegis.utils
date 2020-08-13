@@ -158,7 +158,7 @@ def parse_args():
         $ python {} -i <input_file_path> -o <output_file_path>
 
         The `input_file_path` point to a file which contains easy_id per line
-        The `output_file_path` point to a file to hold the query result''',
+        The `output_file_path` point to a file to hold the querying result''',
         description='Toolkit to query aegis account status API in batch'
     )
 
@@ -202,9 +202,9 @@ def query_account_status(api_url, input_datas, output_datas, err_datas, logger):
             else:
                 data["error"] = "status code={}".format(resp.status_code)
                 err_datas.append(data)
-        except requests.exceptions.ConnectionError as e: # pylint: disable=invalid-name
+        except requests.exceptions.ConnectionError as e:  # pylint: disable=invalid-name
             err_datas.append({"easy_id": eid, "error": str(e)})
-        except Exception as e: # pylint: disable=invalid-name
+        except Exception as e:  # pylint: disable=invalid-name
             logger.exception("Something wrong: {}".format(e))
             if eid:
                 err_datas.append({"easy_id": eid, "error": str(e)})
@@ -220,7 +220,7 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # 1) Compose query URL
-    request_url = "{}:{}/{}".format(args.api_host, args.api_port, args.api_status_path) # pylint: disable=invalid-name
+    request_url = "{}:{}/{}".format(args.api_host, args.api_port, args.api_status_path)  # pylint: disable=invalid-name
     logger.info("Request URL=%s", request_url)
 
     # 2) Loading easy id list
